@@ -1,0 +1,5 @@
+namespace Epic;
+
+class Connection {
+
+}
