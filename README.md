@@ -1,2 +1,2 @@
-zephir-epicmongo
+zephir-epic
 ================
