@@ -3,9 +3,12 @@ default:
   - test
   - watch
 
+test:
+  - phpunit
+
 build:
   - shell:zephirFullClean
   - shell:zephirBuild
 
-test:
+run:
   - shell:zephirTest
