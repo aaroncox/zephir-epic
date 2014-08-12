@@ -1,0 +1,17 @@
+{
+  "name": "zephir-epic",
+  "version": "0.0.1",
+  "description": "EpicMongo ORM rewritten for zephir",
+  "author": "Aaron Cox",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cli": "0.1.13",
+    "time-grunt": "~0.2.10",
+    "load-grunt-tasks": "~0.4.0",
+    "load-grunt-config": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-phpunit": "~0.3.3",
+    "grunt-shell": "~0.7.0",
+    "grunt-bump": "0.0.14"
+  }
+}
