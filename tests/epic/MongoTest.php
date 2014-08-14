@@ -70,7 +70,8 @@ class EpicMongoTest extends PHPUnit_Framework_TestCase {
  * Example Schema for epic_MongoTest
  */
 class epic_MongoTestSchema extends Epic\Schema {
-  protected $typeMap = array(
+  protected $_db = "phpunit";
+  protected $_typeMap = array(
     'test' => 'epic_MongoTestDocument'
   );
 }
@@ -81,5 +82,5 @@ class epic_MongoTestSchema extends Epic\Schema {
  * Example Document for epic_MongoTest
  */
 class epic_MongoTestDocument extends Epic\Document {
-
+  protected $_collection = "test";
 }
