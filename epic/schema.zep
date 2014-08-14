@@ -2,24 +2,56 @@ namespace Epic;
 
 class Schema {
 
-  protected connection;
-  protected db;
-  protected typeMap;
-  protected extending;
-  protected extendSchema;
+  protected _connection;
+  protected _db;
+  protected _typeMap;
+  protected _extending;
+  protected _extendSchema;
 
   public function __construct() {
-    if this->extending {
+    if this->_extending {
       var className;
-      let className = this->extending;
-      let this->extendSchema = new {className};
-      if this->db {
-        this->extendSchema->setDb(this->db);
+      let className = this->_extending;
+      let this->_extendSchema = new {className};
+      if this->_db {
+        this->_extendSchema->setDb(this->_db);
       }
-      if this->connection !== null {
-        this->extendSchema->setConnection(this->connection);
+      if this->_connection !== null {
+        this->_extendSchema->setConnection(this->_connection);
       }
     }
+  }
+
+  public function setDb(db) {
+    let this->_db = db;
+  }
+
+  public function getDb() {
+    if !is_string(this->_db) {
+      if this->_extendSchema {
+        return this->_extendSchema->getDb();
+      }
+      throw new \Exception("No DB defined");
+    }
+    return this->_db;
+  }
+
+  public function getMongoDb() {
+    return Mongo::getConnection(this->getConnection())->selectDb(this->getDb());
+  }
+
+  public function getConnection() {
+    if this->_connection == null && this->_extendSchema {
+      return call_user_func([this->_extendSchema, "getConnection"]);
+    }
+    if this->_connection == null {
+      return "default";
+    }
+    return this->_connection;
+  }
+
+  public function setConnection(connection) {
+    let this->_connection = connection;
   }
 
   public function init() {
@@ -28,18 +60,18 @@ class Schema {
 
   public function map() {
     var initial;
-    if is_array(this->typeMap)  {
-      let initial = this->typeMap;
-      if this->extending {
-        let this->typeMap = this->extendSchema->map();
+    if is_array(this->_typeMap)  {
+      let initial = this->_typeMap;
+      if this->_extending {
+        let this->_typeMap = this->_extendSchema->map();
       } else {
-        let this->typeMap = new Map(this);
+        let this->_typeMap = new Map(this);
       }
       if is_array(initial) {
-        this->typeMap->addType(initial);
+        this->_typeMap->addType(initial);
       }
     }
-    return this->typeMap;
+    return this->_typeMap;
   }
 
   public function resolve() {
@@ -55,7 +87,7 @@ class Schema {
     return result;
   }
 
-  public function resolveString(string type) {
+  public function resolveString(string type, cursor = null, schema = null) {
     var result;
     var argv;
     var map;
@@ -72,8 +104,8 @@ class Schema {
 
     if matches {
 
-      let docType = matches[1];
-      let mapKey = matches[2];
+      let docType = explode(":", type)[0];
+      let mapKey = explode(":", type)[1];
       let pass = argv;
 
       if mapKey {
