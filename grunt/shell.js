@@ -21,6 +21,12 @@ module.exports = {
     options: {
       stderr: false
     },
-    command: 'php test.php'
+    command: 'php test-zephir.php'
+  },
+  normalTest: {
+    options: {
+      stderr: false
+    },
+    command: 'php test-normal.php'
   }
 }

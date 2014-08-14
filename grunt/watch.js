@@ -7,5 +7,15 @@ module.exports = {
       'tests/**/*'
     ],
     tasks: ['build', 'test']
+  },
+  debug: {
+    files: [
+      'epic/*',
+      'epic/**/*',
+      'tests/*',
+      'tests/**/*',
+      'test.php'
+    ],
+    tasks: ['build', 'run']
   }
 };

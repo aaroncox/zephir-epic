@@ -3,6 +3,11 @@ default:
   - test
   - watch
 
+debug:
+  - shell:zephirBuild
+  - run
+  - watch:debug
+
 test:
   - phpunit
 
@@ -12,3 +17,4 @@ build:
 
 run:
   - shell:zephirTest
+  - shell:normalTest
