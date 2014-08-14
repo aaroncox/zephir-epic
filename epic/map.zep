@@ -13,15 +13,15 @@ class Map {
   public function getClass(string type) {
     if !isset(this->_map[type]) {
       if type == "doc" {
-        let this->_map[type] = "Epic_Mongo_Document";
+        let this->_map[type] = "Epic\\Document";
         return this->_map[type];
       }
       if type == "set" {
-        let this->_map[type] = "Epic_Mongo_DocumentSet";
+        let this->_map[type] = "Epic\\DocumentSet";
         return this->_map[type];
       }
       if type == "cursor" {
-        let this->_map[type] = "Epic_Mongo_Iterator_Cursor";
+        let this->_map[type] = "Epic\\Iterator\\Cursor";
         return this->_map[type];
       }
       throw new \Exception(type . " has not be defined.");
