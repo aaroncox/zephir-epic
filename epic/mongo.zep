@@ -39,7 +39,7 @@ class Mongo {
     return self::schemas[name];
   }
 
-  static public function __callStatic(string name, array args) {
+  static public function __callStatic(string name, args) {
     return call_user_func_array([self::getSchema(name), "resolve"], args);
   }
 
