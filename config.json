@@ -8,7 +8,7 @@
         "unused-variable-external": false,
         "possible-wrong-parameter-undefined": false,
         "nonexistent-function": true,
-        "nonexistent-class": true,
+        "nonexistent-class": false,
         "non-valid-isset": true,
         "non-array-update": true,
         "non-valid-objectupdate": true,
@@ -35,7 +35,8 @@
         "constant-folding": true,
         "static-constant-class-folding": true,
         "call-gatherer-pass": true,
-        "check-invalid-reads": false
+        "check-invalid-reads": false,
+        "error-limit": false
     },
     "namespace": "epic",
     "name": "Epic",
