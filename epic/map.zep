@@ -51,28 +51,29 @@ class Map {
     return this->_static[type];
   }
 
-  public function getInstance(type) {
+  public function getInstance(type, var cursor = null, var schema = null) {
     var _class;
     var argv;
     var pass;
     var reflector;
+    var newConfig;
 
     let _class = this->getClass(type);
     let argv = func_get_args();
     let pass = array_slice(argv, 1);
     let reflector = new \ReflectionClass(_class);
+    let newConfig = [0: [], 1: []];
     if method_exists(_class, "isDocumentClass") && this->_schema {
       var config;
       let config = {_class}::isDocumentClass() ? 1 : 0;
-      if !isset(pass[0]) {
-        let pass[0] = [];
-      }
-      if !isset(pass[config]) {
-        let pass[config] = [];
-      }
-      let pass[config]["schema"] = this->_schema;
-      let pass[config]["schemaKey"] = type;
+      let newConfig[config] = [
+        "schema": this->_schema,
+        "schemaKey": type
+      ];
     }
-    return call_user_func_array([reflector, "newInstance"], pass);
+    if cursor {
+      let newConfig[0] = cursor;
+    }
+    return call_user_func_array([reflector, "newInstance"], newConfig);
   }
 }
